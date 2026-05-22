@@ -1,6 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><%- include('../partials/head') %><title>Dashboard - Tritech Hub</title></head>
+<head><%- include('../partials/head') %><title>Dashboard - Tritech Hub</title>
+<style>
+  /* Mobile Responsive Fixes */
+  @media screen and (max-width: 768px) {
+    .stat-cards {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 12px !important;
+    }
+    
+    .nav-cards {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 12px !important;
+    }
+    
+    .topbar {
+      flex-direction: column !important;
+      gap: 10px !important;
+      align-items: flex-start !important;
+      margin-bottom: 20px !important;
+    }
+    
+    .main-content {
+      padding: 15px !important;
+      margin-left: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+    }
+    
+    .layout {
+      width: 100% !important;
+      overflow-x: hidden !important;
+    }
+    
+    .stat-number {
+      font-size: 20px !important;
+    }
+    
+    .stat-label {
+      font-size: 11px !important;
+    }
+    
+    .stat-card {
+      padding: 12px !important;
+    }
+    
+    .nav-card {
+      padding: 15px 10px !important;
+    }
+    
+    .nav-card span {
+      font-size: 12px !important;
+    }
+    
+    .user-chip {
+      width: 100% !important;
+      justify-content: flex-start !important;
+    }
+    
+    h1 {
+      font-size: 24px !important;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .stat-cards {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .nav-cards {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .main-content {
+      padding: 10px !important;
+    }
+    
+    .stat-card {
+      padding: 10px !important;
+    }
+    
+    .nav-card {
+      padding: 12px 10px !important;
+    }
+    
+    h1 {
+      font-size: 20px !important;
+    }
+  }
+  
+  /* Ensure proper box sizing */
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  .layout {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  .main-content {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+</style>
+</head>
 <body>
 <div class="layout">
   <div class="main-content">
@@ -70,4 +185,5 @@
     </div>
   </div>
 </div>
-</body></html>
+</body>
+</html>

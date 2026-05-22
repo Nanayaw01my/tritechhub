@@ -1,8 +1,9 @@
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
   <div class="sidebar-brand">
     <h2>📱 Tritech Hub</h2>
     <small>Admin Portal</small>
   </div>
+  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
   <nav>
     <a href="/admin/dashboard" class="<%= currentPage==='dashboard'?'active':'' %>"><i class="fas fa-th-large"></i> Dashboard</a>
     <a href="/admin/customers" class="<%= currentPage==='customers'?'active':'' %>"><i class="fas fa-users"></i> Customers</a>
@@ -16,3 +17,54 @@
     <a href="/auth/logout" class="btn btn-danger btn-sm" style="width:100%;justify-content:center;"><i class="fas fa-sign-out-alt"></i> Logout</a>
   </div>
 </div>
+
+<style>
+.sidebar {
+  width: 260px;
+  transition: width 0.3s ease;
+}
+
+.sidebar.hidden {
+  width: 60px;
+}
+
+.sidebar.hidden .sidebar-brand h2,
+.sidebar.hidden .sidebar-brand small,
+.sidebar.hidden nav a span,
+.sidebar.hidden .sidebar-bottom .btn span {
+  display: none;
+}
+
+.sidebar.hidden nav a i {
+  margin-right: 0;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  right: -12px;
+  top: 20px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.sidebar.hidden .sidebar-toggle {
+  transform: rotate(180deg);
+}
+</style>
+
+<script>
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('hidden');
+}
+</script>

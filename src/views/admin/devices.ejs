@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %><title>Devices - Tritech Hub</title></head>
+<body>
+<div class="layout">
+  <%- include('../partials/admin-sidebar', {currentPage:'devices'}) %>
+  <div class="main-content">
+    <div class="topbar">
+      <h1>iPhone Devices</h1>
+      <button class="btn btn-primary"><i class="fas fa-plus"></i> Add Device</button>
+    </div>
+    <div class="page-content">
+      <div class="card">
+        <table>
+          <thead><tr><th>Model</th><th>Serial #</th><th>Price (GHS)</th><th>Assigned To</th><th>Lock Status</th><th>Sold Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr><td><strong>iPhone 16</strong></td><td>F2LXP...</td><td>GHS 18,000</td><td>Kwame Boateng</td><td><span class="badge badge-danger"><i class="fas fa-lock"></i> Locked</span></td><td><span class="badge badge-warning">Sold</span></td><td><button class="btn btn-primary btn-sm"><i class="fas fa-unlock"></i> Unlock</button></td></tr>
+            <tr><td><strong>iPhone 15 Pro</strong></td><td>G3MYQ...</td><td>GHS 14,000</td><td>John Mensah</td><td><span class="badge badge-success"><i class="fas fa-lock-open"></i> Unlocked</span></td><td><span class="badge badge-warning">Sold</span></td><td><button class="btn btn-danger btn-sm"><i class="fas fa-lock"></i> Lock</button></td></tr>
+            <tr><td><strong>iPhone 15 Pro Max</strong></td><td>H4NZR...</td><td>GHS 16,000</td><td>—</td><td><span class="badge badge-success"><i class="fas fa-lock-open"></i> Unlocked</span></td><td><span class="badge badge-success">Available</span></td><td><span style="font-size:13px;color:var(--gray);">Not assigned</span></td></tr>
+            <tr><td><strong>iPhone 14</strong></td><td>J5PAW...</td><td>GHS 8,500</td><td>Abena Asante</td><td><span class="badge badge-success"><i class="fas fa-lock-open"></i> Unlocked</span></td><td><span class="badge badge-warning">Sold</span></td><td><button class="btn btn-danger btn-sm"><i class="fas fa-lock"></i> Lock</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

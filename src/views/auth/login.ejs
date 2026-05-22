@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %><title>Login - Tritech Hub</title>
+<style>
+body{background:linear-gradient(135deg,var(--dark-green) 0%,var(--light-green) 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+.login-box{background:#fff;border-radius:16px;padding:40px;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.2);}
+.login-logo{text-align:center;margin-bottom:28px;}
+.login-logo .icon{font-size:48px;margin-bottom:8px;}
+.login-logo h2{color:var(--dark-green);font-size:22px;font-weight:700;}
+.login-logo p{color:var(--gray);font-size:13px;}
+.tab-group{display:flex;background:#f0f9f0;border-radius:8px;padding:4px;margin-bottom:24px;gap:4px;}
+.tab{flex:1;padding:8px;text-align:center;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;color:var(--gray);border:none;background:transparent;}
+.tab.active{background:#fff;color:var(--green);box-shadow:0 1px 4px rgba(0,0,0,.1);}
+.portal-info{background:#f0f9f0;border-radius:8px;padding:12px;margin-bottom:20px;font-size:13px;color:var(--dark-green);}
+.portal-info strong{display:block;margin-bottom:4px;}
+.divider{text-align:center;color:var(--gray);font-size:12px;margin:16px 0;position:relative;}
+.divider::before{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:#eee;}
+.divider span{background:#fff;padding:0 12px;position:relative;}
+.forgot{text-align:right;font-size:13px;color:var(--green);margin-top:-8px;margin-bottom:16px;}
+.back-home{text-align:center;margin-top:20px;font-size:13px;color:var(--gray);}
+.back-home a{color:var(--green);}
+</style>
+</head>
+<body>
+<div class="login-box">
+  <div class="login-logo">
+    <div class="icon">📱</div>
+    <h2>Tritech Hub</h2>
+    <p>iPhone Installment Management</p>
+  </div>
+
+  <% if(error && error.length) { %><div class="alert alert-error"><i class="fas fa-exclamation-circle"></i> <%= error %></div><% } %>
+  <% if(success && success.length) { %><div class="alert alert-success"><i class="fas fa-check-circle"></i> <%= success %></div><% } %>
+
+  <div class="tab-group">
+    <button class="tab active" onclick="setPortal('admin',this)">Admin</button>
+    <button class="tab" onclick="setPortal('staff',this)">Staff</button>
+    <button class="tab" onclick="setPortal('customer',this)">Customer</button>
+  </div>
+
+  <div class="portal-info" id="portal-hint">
+    <strong><i class="fas fa-shield-alt"></i> Admin Portal</strong>
+    Login with your email address
+  </div>
+
+  <form method="POST" action="/auth/login">
+    <input type="hidden" name="portal" id="portalInput" value="admin">
+    <div class="form-group">
+      <label id="identityLabel">Email Address</label>
+      <input type="text" name="identity" id="identityField" placeholder="admin@tenant.com" required autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Enter your password" required>
+    </div>
+    <div class="forgot"><a href="#">Forgot password?</a></div>
+    <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;">
+      <i class="fas fa-sign-in-alt"></i> Login
+    </button>
+  </form>
+
+  <div class="divider"><span>Demo Credentials</span></div>
+  <div style="font-size:12px;color:var(--gray);background:#f9f9f9;border-radius:8px;padding:12px;">
+    <div><strong>Super Admin:</strong> super@tritech.com / super123</div>
+    <div><strong>Admin:</strong> admin@tenant.com / admin123</div>
+    <div><strong>Staff:</strong> staff@tenant.com / staff123</div>
+    <div><strong>Customer:</strong> TRI202400001 / 12345</div>
+  </div>
+
+  <div class="back-home"><a href="/"><i class="fas fa-arrow-left"></i> Back to Home</a></div>
+</div>
+<script>
+const portals={
+  admin:{label:'Email Address',placeholder:'admin@tenant.com',hint:'<strong><i class="fas fa-shield-alt"></i> Admin Portal</strong>Login with your email address'},
+  staff:{label:'Staff ID or Email',placeholder:'Tri001 or staff@tenant.com',hint:'<strong><i class="fas fa-user-tie"></i> Staff Portal</strong>Login with your Staff ID or email'},
+  customer:{label:'Account Number or Email',placeholder:'TRI202400001 or email',hint:'<strong><i class="fas fa-user"></i> Customer Portal</strong>Login with your Account Number or email'}
+};
+function setPortal(p,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('portalInput').value=p;
+  document.getElementById('identityLabel').textContent=portals[p].label;
+  document.getElementById('identityField').placeholder=portals[p].placeholder;
+  document.getElementById('portal-hint').innerHTML=portals[p].hint;
+}
+</script>
+</body></html>

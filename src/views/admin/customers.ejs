@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %><title>Customers - Tritech Hub</title></head>
+<body>
+<div class="layout">
+  <%- include('../partials/admin-sidebar', {currentPage:'customers'}) %>
+  <div class="main-content">
+    <div class="topbar">
+      <h1>Customers</h1>
+      <div class="user-chip">
+        <div class="avatar"><%= user.name.charAt(0) %></div>
+        <div><div style="font-size:13px;font-weight:600;"><%= user.name %></div></div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="card" style="margin-bottom:20px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <input type="search" placeholder="🔍 Search customers by name, phone, account number..." style="max-width:340px;">
+          <select style="max-width:160px;">
+            <option>All Status</option>
+            <option>Active</option>
+            <option>Overdue</option>
+            <option>Locked</option>
+            <option>Completed</option>
+          </select>
+        </div>
+      </div>
+      <div class="card">
+        <table>
+          <thead>
+            <tr><th>Account #</th><th>Customer</th><th>Phone</th><th>Device</th><th>Balance</th><th>Next Due</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>TRI202400001</strong></td>
+              <td><div style="display:flex;align-items:center;gap:10px;"><div class="avatar" style="width:32px;height:32px;font-size:12px;">J</div><div><div style="font-weight:500;">John Mensah</div><div style="font-size:12px;color:var(--gray);">john@email.com</div></div></div></td>
+              <td>055 123 4567</td>
+              <td>iPhone 15 Pro</td>
+              <td><strong>GHS 8,333</strong></td>
+              <td>Jun 15, 2024</td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td><a href="#" class="btn btn-primary btn-sm">View</a></td>
+            </tr>
+            <tr>
+              <td><strong>TRI202400002</strong></td>
+              <td><div style="display:flex;align-items:center;gap:10px;"><div class="avatar" style="width:32px;height:32px;font-size:12px;background:#c62828;">A</div><div><div style="font-weight:500;">Abena Asante</div><div style="font-size:12px;color:var(--gray);">abena@email.com</div></div></div></td>
+              <td>024 987 6543</td>
+              <td>iPhone 14</td>
+              <td><strong>GHS 5,100</strong></td>
+              <td>Jun 01, 2024</td>
+              <td><span class="badge badge-danger">Overdue</span></td>
+              <td><a href="#" class="btn btn-primary btn-sm">View</a></td>
+            </tr>
+            <tr>
+              <td><strong>TRI202400003</strong></td>
+              <td><div style="display:flex;align-items:center;gap:10px;"><div class="avatar" style="width:32px;height:32px;font-size:12px;background:#e65100;">K</div><div><div style="font-weight:500;">Kwame Boateng</div><div style="font-size:12px;color:var(--gray);">kwame@email.com</div></div></div></td>
+              <td>050 555 0101</td>
+              <td>iPhone 16</td>
+              <td><strong>GHS 14,000</strong></td>
+              <td>Jun 08, 2024</td>
+              <td><span class="badge badge-warning">Locked</span></td>
+              <td><a href="#" class="btn btn-primary btn-sm">View</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

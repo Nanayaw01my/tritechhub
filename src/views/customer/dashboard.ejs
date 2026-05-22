@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %><title>My Dashboard - Tritech Hub</title>
+<style>
+.device-card{background:linear-gradient(135deg,var(--dark-green),var(--light-green));border-radius:16px;padding:28px;color:#fff;margin-bottom:24px;}
+.device-card .model{font-size:22px;font-weight:700;margin-bottom:4px;}
+.device-card .serial{opacity:.8;font-size:13px;}
+.lock-status{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.2);padding:6px 14px;border-radius:20px;font-size:13px;margin-top:12px;}
+.payment-card{background:#fff;border-radius:12px;padding:24px;box-shadow:var(--shadow);margin-bottom:16px;}
+.due-amount{font-size:32px;font-weight:800;color:var(--dark-green);}
+.pay-methods{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px;}
+.pay-method{border:2px solid #e0e0e0;border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:all .2s;font-size:13px;font-weight:500;}
+.pay-method:hover,.pay-method.selected{border-color:var(--green);background:#f0fdf0;color:var(--green);}
+.pay-method i{font-size:24px;display:block;margin-bottom:6px;}
+.history-table tr td:last-child{color:var(--green);font-weight:600;}
+</style>
+</head>
+<body>
+<div style="background:var(--dark-green);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;">
+  <div style="font-weight:700;font-size:16px;">📱 Tritech Hub</div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span style="font-size:13px;opacity:.9;">TRI202400001 — <%= user.name %></span>
+    <a href="/auth/logout" style="color:#fff;opacity:.8;font-size:13px;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+</div>
+
+<div style="max-width:700px;margin:0 auto;padding:24px 16px;">
+  <% if(error && error.length) { %><div class="alert alert-error"><%= error %></div><% } %>
+
+  <!-- Device Card -->
+  <div class="device-card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+      <div>
+        <div class="model">iPhone 15 Pro</div>
+        <div class="serial">S/N: G3MYQ1234 · UDID: a1b2c3...</div>
+        <div class="lock-status"><i class="fas fa-lock-open"></i> Device Unlocked</div>
+      </div>
+      <div style="font-size:48px;">📱</div>
+    </div>
+    <div style="margin-top:20px;">
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;"><span>Payment Progress</span><span>2 of 6 payments</span></div>
+      <div style="background:rgba(255,255,255,.3);border-radius:5px;height:10px;"><div style="background:#fff;width:33%;height:100%;border-radius:5px;"></div></div>
+    </div>
+  </div>
+
+  <!-- Next Payment -->
+  <div class="payment-card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div style="font-size:13px;color:var(--gray);margin-bottom:4px;">Next Payment Due</div>
+        <div class="due-amount">GHS 1,667</div>
+        <div style="font-size:13px;color:#c62828;margin-top:4px;"><i class="fas fa-calendar"></i> Due: June 15, 2024</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:13px;color:var(--gray);margin-bottom:4px;">Remaining Balance</div>
+        <div style="font-size:22px;font-weight:700;color:var(--dark-green);">GHS 8,333</div>
+        <span class="badge badge-success">Good Standing</span>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;">
+      <div style="font-size:14px;font-weight:600;margin-bottom:12px;">Choose Payment Method:</div>
+      <div class="pay-methods">
+        <div class="pay-method selected" onclick="selectMethod(this)"><i class="fas fa-mobile-alt" style="color:#f5a623;"></i>MTN MoMo</div>
+        <div class="pay-method" onclick="selectMethod(this)"><i class="fas fa-mobile-alt" style="color:#e4003a;"></i>Vodafone</div>
+        <div class="pay-method" onclick="selectMethod(this)"><i class="fas fa-credit-card" style="color:#1565c0;"></i>Card</div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px;padding:14px;font-size:15px;" onclick="payNow()">
+        <i class="fas fa-lock"></i> Pay GHS 1,667 via Paystack
+      </button>
+    </div>
+  </div>
+
+  <!-- Payment History -->
+  <div class="payment-card">
+    <h3 style="font-size:15px;margin-bottom:16px;"><i class="fas fa-history"></i> Payment History</h3>
+    <table class="history-table">
+      <thead><tr><th>Date</th><th>Amount</th><th>Method</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>May 15, 2024</td><td>GHS 1,667</td><td>MoMo</td><td><span class="badge badge-success">Paid</span></td></tr>
+        <tr><td>Apr 15, 2024</td><td>GHS 4,000</td><td>Cash</td><td><span class="badge badge-success">Down Payment</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+function selectMethod(el){document.querySelectorAll('.pay-method').forEach(m=>m.classList.remove('selected'));el.classList.add('selected');}
+function payNow(){alert('Redirecting to Paystack payment gateway...\n(Integrate with real Paystack API key to go live)');}
+</script>
+</body></html>

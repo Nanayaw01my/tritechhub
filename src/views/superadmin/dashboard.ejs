@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %><title>Super Admin - Tritech Hub</title></head>
+<body>
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-brand"><h2>📱 Tritech Hub</h2><small>Super Admin</small></div>
+    <nav>
+      <a href="/admin/super" class="active"><i class="fas fa-th-large"></i> Dashboard</a>
+      <a href="#"><i class="fas fa-building"></i> Tenants</a>
+      <a href="#"><i class="fas fa-exchange-alt"></i> All Transactions</a>
+      <a href="#"><i class="fas fa-cog"></i> System Settings</a>
+    </nav>
+    <div class="sidebar-bottom"><a href="/auth/logout" class="btn btn-danger btn-sm" style="width:100%;justify-content:center;"><i class="fas fa-sign-out-alt"></i> Logout</a></div>
+  </div>
+  <div class="main-content">
+    <div class="topbar">
+      <h1>Super Admin Dashboard</h1>
+      <div class="user-chip"><div class="avatar"><%= user.name.charAt(0) %></div><div><div style="font-size:13px;font-weight:600;"><%= user.name %></div><div style="font-size:11px;color:var(--gray);">Super Admin</div></div></div>
+    </div>
+    <div class="page-content">
+      <div class="stat-cards">
+        <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-building"></i></div><div><div class="stat-number">3</div><div class="stat-label">Total Tenants</div></div></div>
+        <div class="stat-card"><div class="stat-icon green"><i class="fas fa-users"></i></div><div><div class="stat-number">84</div><div class="stat-label">Total Customers</div></div></div>
+        <div class="stat-card"><div class="stat-icon orange"><i class="fas fa-coins"></i></div><div><div class="stat-number">GHS 1.2M</div><div class="stat-label">Total Transactions</div></div></div>
+        <div class="stat-card"><div class="stat-icon green"><i class="fas fa-check-circle"></i></div><div><div class="stat-number">3</div><div class="stat-label">Active Tenants</div></div></div>
+        <div class="stat-card"><div class="stat-icon red"><i class="fas fa-exclamation-triangle"></i></div><div><div class="stat-number">0</div><div class="stat-label">Inactive Tenants</div></div></div>
+        <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-mobile-alt"></i></div><div><div class="stat-number">67</div><div class="stat-label">Total Devices</div></div></div>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <h3 style="font-size:15px;">Tenants</h3>
+          <button class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Add Tenant</button>
+        </div>
+        <table>
+          <thead><tr><th>Subdomain</th><th>Business Name</th><th>Email</th><th>Customers</th><th>Plan</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr><td><strong>accra.tritechhub.com</strong></td><td>Tritech Accra</td><td>accra@tritech.com</td><td>28</td><td><span class="badge badge-success">Pro</span></td><td><span class="badge badge-success">Active</span></td><td><button class="btn btn-primary btn-sm">Manage</button></td></tr>
+            <tr><td><strong>kumasi.tritechhub.com</strong></td><td>Tritech Kumasi</td><td>kumasi@tritech.com</td><td>31</td><td><span class="badge badge-success">Pro</span></td><td><span class="badge badge-success">Active</span></td><td><button class="btn btn-primary btn-sm">Manage</button></td></tr>
+            <tr><td><strong>takoradi.tritechhub.com</strong></td><td>Tritech Takoradi</td><td>takoradi@tritech.com</td><td>25</td><td><span class="badge badge-warning">Basic</span></td><td><span class="badge badge-success">Active</span></td><td><button class="btn btn-primary btn-sm">Manage</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

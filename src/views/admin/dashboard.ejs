@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %><title>Dashboard - Tritech Hub</title></head>
+<body>
+<div class="layout">
+  <%- include('../partials/admin-sidebar', {currentPage:'dashboard'}) %>
+  <div class="main-content">
+    <div class="topbar">
+      <h1>Dashboard</h1>
+      <div class="user-chip">
+        <div class="avatar"><%= user.name.charAt(0) %></div>
+        <div>
+          <div style="font-size:13px;font-weight:600;"><%= user.name %></div>
+          <div style="font-size:11px;color:var(--gray);">Tenant Admin</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-content">
+      <% if(error && error.length) { %><div class="alert alert-error"><%= error %></div><% } %>
+      <% if(success && success.length) { %><div class="alert alert-success"><%= success %></div><% } %>
+
+      <!-- Top 6 Stat Cards -->
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fas fa-user-tie"></i></div>
+          <div><div class="stat-number">4</div><div class="stat-label">Total Staff</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fas fa-users"></i></div>
+          <div><div class="stat-number">28</div><div class="stat-label">Total Customers</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fas fa-mobile-alt"></i></div>
+          <div><div class="stat-number">22</div><div class="stat-label">Total Devices</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red"><i class="fas fa-exclamation-circle"></i></div>
+          <div><div class="stat-number">5</div><div class="stat-label">Overdue Payments</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange"><i class="fas fa-lock"></i></div>
+          <div><div class="stat-number">2</div><div class="stat-label">Locked Phones</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+          <div><div class="stat-number">20</div><div class="stat-label">Active Plans</div></div>
+        </div>
+      </div>
+
+      <!-- Bottom 6 Nav Cards -->
+      <div class="nav-cards">
+        <a href="/admin/customers" class="nav-card">
+          <i class="fas fa-users"></i><span>CUSTOMERS</span>
+        </a>
+        <a href="/admin/staff" class="nav-card">
+          <i class="fas fa-user-tie"></i><span>STAFF</span>
+        </a>
+        <a href="/admin/devices" class="nav-card">
+          <i class="fas fa-mobile-alt"></i><span>DEVICES</span>
+        </a>
+        <a href="/admin/transactions" class="nav-card">
+          <i class="fas fa-exchange-alt"></i><span>TRANSACTIONS</span>
+        </a>
+        <a href="/admin/reports" class="nav-card">
+          <i class="fas fa-chart-bar"></i><span>REPORTS</span>
+        </a>
+        <a href="/admin/settings" class="nav-card">
+          <i class="fas fa-cog"></i><span>SETTINGS</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

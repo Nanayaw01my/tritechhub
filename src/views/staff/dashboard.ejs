@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %><title>Staff Dashboard - Tritech Hub</title></head>
+<body>
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-brand"><h2>📱 Tritech Hub</h2><small>Staff Portal</small></div>
+    <nav>
+      <a href="/staff/dashboard" class="active"><i class="fas fa-th-large"></i> Dashboard</a>
+      <a href="/staff/add-customer"><i class="fas fa-user-plus"></i> Add Customer</a>
+      <a href="/staff/customers"><i class="fas fa-users"></i> My Customers</a>
+    </nav>
+    <div class="sidebar-bottom"><a href="/auth/logout" class="btn btn-danger btn-sm" style="width:100%;justify-content:center;"><i class="fas fa-sign-out-alt"></i> Logout</a></div>
+  </div>
+  <div class="main-content">
+    <div class="topbar">
+      <h1>Staff Dashboard</h1>
+      <div class="user-chip"><div class="avatar"><%= user.name.charAt(0) %></div><div><div style="font-size:13px;font-weight:600;"><%= user.name %></div><div style="font-size:11px;color:var(--gray);">Staff — Tri001</div></div></div>
+    </div>
+    <div class="page-content">
+      <div class="stat-cards">
+        <div class="stat-card"><div class="stat-icon green"><i class="fas fa-users"></i></div><div><div class="stat-number">12</div><div class="stat-label">My Customers</div></div></div>
+        <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-check-circle"></i></div><div><div class="stat-number">9</div><div class="stat-label">Active Plans</div></div></div>
+        <div class="stat-card"><div class="stat-icon red"><i class="fas fa-exclamation-circle"></i></div><div><div class="stat-number">2</div><div class="stat-label">Overdue</div></div></div>
+      </div>
+      <div class="nav-cards" style="grid-template-columns:repeat(2,1fr);">
+        <a href="/staff/add-customer" class="nav-card"><i class="fas fa-user-plus"></i><span>ADD CUSTOMER</span></a>
+        <a href="/staff/customers" class="nav-card"><i class="fas fa-users"></i><span>MY CUSTOMERS</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

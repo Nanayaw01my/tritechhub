@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %><title>My Customers - Tritech Hub</title></head>
+<body>
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-brand"><h2>📱 Tritech Hub</h2><small>Staff Portal</small></div>
+    <nav>
+      <a href="/staff/dashboard"><i class="fas fa-th-large"></i> Dashboard</a>
+      <a href="/staff/add-customer"><i class="fas fa-user-plus"></i> Add Customer</a>
+      <a href="/staff/customers" class="active"><i class="fas fa-users"></i> My Customers</a>
+    </nav>
+    <div class="sidebar-bottom"><a href="/auth/logout" class="btn btn-danger btn-sm" style="width:100%;justify-content:center;"><i class="fas fa-sign-out-alt"></i> Logout</a></div>
+  </div>
+  <div class="main-content">
+    <div class="topbar"><h1>My Customers</h1><a href="/staff/add-customer" class="btn btn-primary"><i class="fas fa-plus"></i> Add Customer</a></div>
+    <div class="page-content">
+      <div class="card">
+        <table>
+          <thead><tr><th>Account #</th><th>Customer</th><th>Device</th><th>Next Payment</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr><td><strong>TRI202400001</strong></td><td>John Mensah<br><small style="color:var(--gray);">055 123 4567</small></td><td>iPhone 15 Pro</td><td>Jun 15, 2024</td><td><strong>GHS 1,667</strong></td><td><span class="badge badge-success">Active</span></td><td><button class="btn btn-primary btn-sm"><i class="fas fa-credit-card"></i> Pay</button></td></tr>
+            <tr><td><strong>TRI202400004</strong></td><td>Efua Mensah<br><small style="color:var(--gray);">024 444 5555</small></td><td>iPhone 14 Pro</td><td>Jun 12, 2024</td><td><strong>GHS 1,833</strong></td><td><span class="badge badge-danger">Overdue</span></td><td><button class="btn btn-primary btn-sm"><i class="fas fa-credit-card"></i> Pay</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

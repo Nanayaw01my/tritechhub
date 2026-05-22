@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: tritechhub
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
+      - key: PAYSTACK_SECRET_KEY
+        sync: false
+      - key: SIMPLEMDM_API_KEY
+        sync: false
+      - key: AT_API_KEY
+        sync: false

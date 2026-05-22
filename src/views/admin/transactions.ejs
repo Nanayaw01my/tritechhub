@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %><title>Transactions - Tritech Hub</title></head>
+<body>
+<div class="layout">
+  <%- include('../partials/admin-sidebar', {currentPage:'transactions'}) %>
+  <div class="main-content">
+    <div class="topbar"><h1>Transactions</h1></div>
+    <div class="page-content">
+      <div class="card" style="margin-bottom:20px;">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <input type="date" style="max-width:160px;">
+          <input type="date" style="max-width:160px;">
+          <select style="max-width:160px;"><option>All Methods</option><option>Paystack</option><option>Cash</option></select>
+          <button class="btn btn-primary btn-sm"><i class="fas fa-filter"></i> Filter</button>
+        </div>
+      </div>
+      <div class="card">
+        <table>
+          <thead><tr><th>Date</th><th>Customer</th><th>Amount</th><th>Method</th><th>Reference</th><th>Recorded By</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Jun 10, 2024</td><td>John Mensah</td><td><strong>GHS 1,667</strong></td><td><span class="badge badge-success">MoMo</span></td><td>TRX-001234</td><td>Kofi (Staff)</td><td><span class="badge badge-success">Success</span></td></tr>
+            <tr><td>Jun 08, 2024</td><td>Abena Asante</td><td><strong>GHS 1,417</strong></td><td><span class="badge badge-success">Card</span></td><td>TRX-001233</td><td>Customer</td><td><span class="badge badge-success">Success</span></td></tr>
+            <tr><td>Jun 01, 2024</td><td>Kwame Boateng</td><td><strong>GHS 3,000</strong></td><td><span class="badge badge-warning">Cash</span></td><td>TRX-001230</td><td>Admin</td><td><span class="badge badge-success">Success</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

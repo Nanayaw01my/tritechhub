@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %><title>Reports - Tritech Hub</title></head>
+<body>
+<div class="layout">
+  <%- include('../partials/admin-sidebar', {currentPage:'reports'}) %>
+  <div class="main-content">
+    <div class="topbar"><h1>Reports & Analytics</h1></div>
+    <div class="page-content">
+      <div class="stat-cards" style="margin-bottom:24px;">
+        <div class="stat-card"><div class="stat-icon green"><i class="fas fa-coins"></i></div><div><div class="stat-number">GHS 42,500</div><div class="stat-label">Total Collected (Month)</div></div></div>
+        <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-calendar-check"></i></div><div><div class="stat-number">38</div><div class="stat-label">Payments This Month</div></div></div>
+        <div class="stat-card"><div class="stat-icon orange"><i class="fas fa-hourglass-half"></i></div><div><div class="stat-number">GHS 186,000</div><div class="stat-label">Outstanding Balance</div></div></div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="margin-bottom:16px;font-size:15px;"><i class="fas fa-download"></i> Download Reports</h3>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <button class="btn btn-outline"><i class="fas fa-file-csv"></i> Daily Report (CSV)</button>
+            <button class="btn btn-outline"><i class="fas fa-file-csv"></i> Weekly Report (CSV)</button>
+            <button class="btn btn-outline"><i class="fas fa-file-csv"></i> Monthly Report (CSV)</button>
+            <button class="btn btn-outline"><i class="fas fa-file-pdf"></i> Full Report (PDF)</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom:16px;font-size:15px;"><i class="fas fa-chart-pie"></i> Payment Summary</h3>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div><div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px;"><span>On-Time Payments</span><strong>76%</strong></div><div class="progress"><div class="progress-bar" style="width:76%"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px;"><span>Overdue</span><strong>18%</strong></div><div class="progress"><div class="progress-bar" style="width:18%;background:#c62828;"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px;"><span>Completed Plans</span><strong>6%</strong></div><div class="progress"><div class="progress-bar" style="width:6%;background:#1565c0;"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

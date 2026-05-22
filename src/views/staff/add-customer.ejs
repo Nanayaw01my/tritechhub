@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><%- include('../partials/head') %><title>Add Customer - Tritech Hub</title>
+<style>
+.section-title{font-size:15px;font-weight:600;color:var(--dark-green);border-bottom:2px solid var(--light-green);padding-bottom:8px;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+.camera-box{border:2px dashed #ccc;border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;background:#fafffe;position:relative;}
+.camera-box:hover{border-color:var(--green);background:#f0fdf0;}
+.camera-box i{font-size:28px;color:var(--green);margin-bottom:8px;display:block;}
+.camera-box small{color:var(--gray);font-size:12px;}
+.camera-box img{width:100%;height:120px;object-fit:cover;border-radius:8px;}
+video{width:100%;border-radius:8px;display:none;}
+.capture-btn{background:var(--green);color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;margin-top:8px;font-size:13px;display:none;}
+.step-indicator{display:flex;gap:0;margin-bottom:28px;}
+.step{flex:1;padding:10px;text-align:center;font-size:12px;font-weight:500;background:#f0f0f0;color:var(--gray);}
+.step.active{background:var(--green);color:#fff;}
+.step.done{background:#e8f5e9;color:var(--green);}
+.step:first-child{border-radius:8px 0 0 8px;}
+.step:last-child{border-radius:0 8px 8px 0;}
+.calc-box{background:#f0fdf0;border-radius:10px;padding:16px;font-size:14px;}
+.calc-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e0f0e0;}
+.calc-row:last-child{border:none;font-weight:700;color:var(--green);}
+</style>
+</head>
+<body>
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-brand"><h2>📱 Tritech Hub</h2><small>Staff Portal</small></div>
+    <nav>
+      <a href="/staff/dashboard"><i class="fas fa-th-large"></i> Dashboard</a>
+      <a href="/staff/add-customer" class="active"><i class="fas fa-user-plus"></i> Add Customer</a>
+      <a href="/staff/customers"><i class="fas fa-users"></i> My Customers</a>
+    </nav>
+    <div class="sidebar-bottom"><a href="/auth/logout" class="btn btn-danger btn-sm" style="width:100%;justify-content:center;"><i class="fas fa-sign-out-alt"></i> Logout</a></div>
+  </div>
+  <div class="main-content">
+    <div class="topbar"><h1>Register New Customer</h1></div>
+    <div class="page-content">
+
+      <div class="step-indicator">
+        <div class="step active" id="s1">1. Personal Info</div>
+        <div class="step" id="s2">2. Photos</div>
+        <div class="step" id="s3">3. Location</div>
+        <div class="step" id="s4">4. Guarantor</div>
+        <div class="step" id="s5">5. Device & Plan</div>
+      </div>
+
+      <!-- Step 1: Personal Info -->
+      <div id="step1">
+        <div class="card">
+          <div class="section-title"><i class="fas fa-user"></i> Personal Information</div>
+          <div class="grid-2">
+            <div class="form-group"><label>Full Name *</label><input type="text" placeholder="e.g. John Kwame Mensah" id="fullname"></div>
+            <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@email.com" id="email"></div>
+            <div class="form-group"><label>Phone Number *</label><input type="tel" placeholder="055 123 4567" id="phone"></div>
+            <div class="form-group"><label>Ghana Card ID *</label><input type="text" placeholder="GHA-000000000-0" id="ghana_card"></div>
+            <div class="form-group"><label>Occupation</label><input type="text" placeholder="e.g. Teacher, Trader" id="occupation"></div>
+            <div class="form-group"><label>Monthly Income (GHS)</label><input type="number" placeholder="e.g. 3000" id="income"></div>
+          </div>
+          <div class="form-group"><label>Income Source</label><input type="text" placeholder="e.g. Salary, Business, Farming"></div>
+          <div class="form-group"><label>Customer Password (max 5 characters) *</label><input type="password" maxlength="5" placeholder="e.g. abc12" id="password"></div>
+          <div style="background:#f0f9f0;padding:12px;border-radius:8px;font-size:13px;color:var(--green);margin-bottom:20px;"><i class="fas fa-info-circle"></i> Account number will be auto-generated (e.g. TRI202400028)</div>
+          <button class="btn btn-primary" onclick="goStep(2)">Next: Photos <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Step 2: Photos -->
+      <div id="step2" style="display:none;">
+        <div class="card">
+          <div class="section-title"><i class="fas fa-camera"></i> Photo Capture (Camera Only)</div>
+          <div class="grid-2">
+            <div>
+              <label style="margin-bottom:8px;">Ghana Card — Front *</label>
+              <div class="camera-box" onclick="openCamera('cam1','cap1','prev1')">
+                <video id="cam1"></video>
+                <img id="prev1" style="display:none;">
+                <div id="cam1-placeholder"><i class="fas fa-camera"></i><div style="font-weight:500;margin-bottom:4px;">Tap to open camera</div><small>Ghana Card Front</small></div>
+                <button class="capture-btn" id="cap1" onclick="capturePhoto(event,'cam1','cap1','prev1','cam1-placeholder')">📸 Capture</button>
+              </div>
+            </div>
+            <div>
+              <label style="margin-bottom:8px;">Ghana Card — Back *</label>
+              <div class="camera-box" onclick="openCamera('cam2','cap2','prev2')">
+                <video id="cam2"></video>
+                <img id="prev2" style="display:none;">
+                <div id="cam2-placeholder"><i class="fas fa-camera"></i><div style="font-weight:500;margin-bottom:4px;">Tap to open camera</div><small>Ghana Card Back</small></div>
+                <button class="capture-btn" id="cap2" onclick="capturePhoto(event,'cam2','cap2','prev2','cam2-placeholder')">📸 Capture</button>
+              </div>
+            </div>
+            <div>
+              <label style="margin-bottom:8px;">Customer Photo (Optional)</label>
+              <div class="camera-box" onclick="openCamera('cam3','cap3','prev3')">
+                <video id="cam3"></video>
+                <img id="prev3" style="display:none;">
+                <div id="cam3-placeholder"><i class="fas fa-user-circle"></i><div style="font-weight:500;margin-bottom:4px;">Tap to open camera</div><small>Customer Photo</small></div>
+                <button class="capture-btn" id="cap3" onclick="capturePhoto(event,'cam3','cap3','prev3','cam3-placeholder')">📸 Capture</button>
+              </div>
+            </div>
+            <div>
+              <label style="margin-bottom:8px;">Guarantor Photo (Optional)</label>
+              <div class="camera-box" onclick="openCamera('cam4','cap4','prev4')">
+                <video id="cam4"></video>
+                <img id="prev4" style="display:none;">
+                <div id="cam4-placeholder"><i class="fas fa-user-shield"></i><div style="font-weight:500;margin-bottom:4px;">Tap to open camera</div><small>Guarantor Photo</small></div>
+                <button class="capture-btn" id="cap4" onclick="capturePhoto(event,'cam4','cap4','prev4','cam4-placeholder')">📸 Capture</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:16px;"><label>Proof of Income (File Upload — Optional)</label><input type="file" accept=".pdf,.jpg,.png" style="width:auto;padding:6px;"></div>
+          <div style="display:flex;gap:12px;margin-top:20px;">
+            <button class="btn btn-outline" onclick="goStep(1)"><i class="fas fa-arrow-left"></i> Back</button>
+            <button class="btn btn-primary" onclick="goStep(3)">Next: Location <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Location -->
+      <div id="step3" style="display:none;">
+        <div class="card">
+          <div class="section-title"><i class="fas fa-map-marker-alt"></i> Location Information</div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Region *</label>
+              <select id="regionSelect" onchange="loadDistricts()">
+                <option value="">Select Region</option>
+                <option>Greater Accra</option><option>Ashanti</option><option>Western</option><option>Central</option>
+                <option>Eastern</option><option>Volta</option><option>Northern</option><option>Upper East</option>
+                <option>Upper West</option><option>Bono</option><option>Bono East</option><option>Ahafo</option>
+                <option>Oti</option><option>Savannah</option><option>North East</option><option>Western North</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>District *</label>
+              <select id="districtSelect"><option value="">Select Region first</option></select>
+            </div>
+            <div class="form-group"><label>Town / Location *</label><input type="text" placeholder="e.g. Madina"></div>
+            <div class="form-group"><label>Landmark</label><input type="text" placeholder="e.g. Near Total Filling Station"></div>
+          </div>
+          <div class="form-group"><label>GPS Address</label><input type="text" placeholder="e.g. GA-123-4567"></div>
+          <div style="display:flex;gap:12px;margin-top:20px;">
+            <button class="btn btn-outline" onclick="goStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+            <button class="btn btn-primary" onclick="goStep(4)">Next: Guarantor <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Guarantor -->
+      <div id="step4" style="display:none;">
+        <div class="card">
+          <div class="section-title"><i class="fas fa-user-shield"></i> Guarantor Information</div>
+          <div class="grid-2">
+            <div class="form-group"><label>Guarantor Full Name *</label><input type="text" placeholder="Full name"></div>
+            <div class="form-group"><label>Phone Number *</label><input type="tel" placeholder="055 000 0000"></div>
+            <div class="form-group"><label>Ghana Card ID *</label><input type="text" placeholder="GHA-000000000-0"></div>
+            <div class="form-group"><label>Relationship *</label>
+              <select><option>Parent</option><option>Sibling</option><option>Spouse</option><option>Friend</option><option>Colleague</option><option>Other</option></select>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;margin-top:20px;">
+            <button class="btn btn-outline" onclick="goStep(3)"><i class="fas fa-arrow-left"></i> Back</button>
+            <button class="btn btn-primary" onclick="goStep(5)">Next: Device & Plan <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5: Device & Plan -->
+      <div id="step5" style="display:none;">
+        <div class="card">
+          <div class="section-title"><i class="fas fa-mobile-alt"></i> Device & Installment Plan</div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label>iPhone Model *</label>
+              <select id="iphone_model" onchange="calculatePlan()">
+                <option value="">Select iPhone</option>
+                <option value="8500">iPhone 14 — GHS 8,500</option>
+                <option value="11000">iPhone 14 Pro — GHS 11,000</option>
+                <option value="12500">iPhone 14 Pro Max — GHS 12,500</option>
+                <option value="10500">iPhone 15 — GHS 10,500</option>
+                <option value="14000">iPhone 15 Pro — GHS 14,000</option>
+                <option value="16000">iPhone 15 Pro Max — GHS 16,000</option>
+                <option value="18000">iPhone 16 — GHS 18,000</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Payment Frequency *</label>
+              <select id="frequency" onchange="calculatePlan()">
+                <option value="monthly">Monthly (6 payments)</option>
+                <option value="weekly">Weekly (26 payments)</option>
+                <option value="daily">Daily (180 payments)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Down Payment (GHS) *</label>
+              <input type="number" id="down_payment" placeholder="e.g. 4000" oninput="calculatePlan()">
+            </div>
+          </div>
+          <div class="calc-box" id="calc_result" style="display:none;">
+            <div style="font-weight:600;margin-bottom:12px;color:var(--dark-green);"><i class="fas fa-calculator"></i> Payment Plan Breakdown</div>
+            <div class="calc-row"><span>Device Price</span><span id="c_price">—</span></div>
+            <div class="calc-row"><span>Down Payment</span><span id="c_down">—</span></div>
+            <div class="calc-row"><span>Remaining Balance</span><span id="c_remaining">—</span></div>
+            <div class="calc-row"><span>Number of Payments</span><span id="c_count">—</span></div>
+            <div class="calc-row"><span id="c_freq_label">Monthly Installment</span><span id="c_installment">—</span></div>
+          </div>
+          <div style="display:flex;gap:12px;margin-top:20px;">
+            <button class="btn btn-outline" onclick="goStep(4)"><i class="fas fa-arrow-left"></i> Back</button>
+            <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="submitForm()"><i class="fas fa-check-circle"></i> Register Customer</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// Step navigation
+function goStep(n){
+  for(let i=1;i<=5;i++){
+    document.getElementById('step'+i).style.display=i===n?'block':'none';
+    const s=document.getElementById('s'+i);
+    s.className='step'+(i<n?' done':i===n?' active':'');
+  }
+}
+
+// Camera
+const streams={};
+async function openCamera(vid,cap,prev){
+  if(streams[vid]){return;}
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
+    streams[vid]=stream;
+    const v=document.getElementById(vid);
+    v.srcObject=stream;v.style.display='block';v.play();
+    const c=document.getElementById(cap);c.style.display='inline-block';
+    document.getElementById(vid+'-placeholder').querySelector('i').style.display='none';
+  }catch(e){alert('Camera access denied. Please allow camera permission.');}
+}
+function capturePhoto(e,vid,cap,prev,placeholder){
+  e.stopPropagation();
+  const v=document.getElementById(vid);
+  const canvas=document.createElement('canvas');
+  canvas.width=v.videoWidth;canvas.height=v.videoHeight;
+  canvas.getContext('2d').drawImage(v,0,0);
+  const img=document.getElementById(prev);
+  img.src=canvas.toDataURL('image/jpeg');img.style.display='block';
+  v.style.display='none';
+  document.getElementById(cap).style.display='none';
+  if(streams[vid]){streams[vid].getTracks().forEach(t=>t.stop());delete streams[vid];}
+}
+
+// Ghana districts
+const districts={
+  'Greater Accra':['Accra Metro','Adenta','Ashaiman','Ga East','Ga West','Ga South','Ga Central','Kpone Katamanso','La Dade-Kotopon','La Nkwantanang','Ledzokuku','Madina','Ningo-Prampram','Shai Osudoku','Tema Metro','Tema West','Weija-Gbawe'],
+  'Ashanti':['Kumasi Metro','Obuasi','Ejisu','Mampong','Bekwai','Asokore Mampong','Suame','Oforikrom','Kwabre East','Atwima Nwabiagya North','Atwima Nwabiagya South','Atwima Kwanwoma','Bosomtwe','Adansi North','Adansi South'],
+  'Western':['Sekondi-Takoradi','Tarkwa','Shama','Ahanta West','Ellembelle','Nzema East','Prestea Huni-Valley','Wassa East','Wassa Amenfi Central'],
+  'Central':['Cape Coast','Kasoa','Winneba','Elmina','Awutu Senya East','Mfantsiman','Agona West','Assin Fosu','Komenda-Edina'],
+  'Eastern':['Koforidua','Nkawkaw','Suhum','Nsawam','Aburi','Akuapim North','Akuapim South','Birim Central','Birim North'],
+  'Volta':['Ho','Hohoe','Keta','Kpando','Akatsi South','North Tongu','South Tongu','Central Tongu'],
+  'Northern':['Tamale Metro','Sagnarigu','Yendi','Tolon','Kumbungu','Mion','Nanton','Savelugu'],
+  'Upper East':['Bolgatanga','Bawku','Navrongo','Pusiga','Talensi','Bongo','Kassena-Nankana West','Garu'],
+  'Upper West':['Wa','Lawra','Nandom','Jirapa','Sissala East','Sissala West','Lambussie','Nadowli-Kaleo'],
+  'Bono':['Sunyani','Berekum','Dormaa Central','Wenchi','Jaman North','Jaman South','Tain'],
+  'Bono East':['Techiman','Kintampo North','Atebubu-Amantin','Nkoranza North','Pru East','Pru West','Sene East'],
+  'Ahafo':['Asunafo North','Asunafo South','Asutifi North','Asutifi South','Tano North','Tano South'],
+  'Oti':['Dambai','Jasikan','Kadjebi','Krachi East','Krachi West','Nkwanta North','Nkwanta South'],
+  'Savannah':['Damongo','Salaga','Bole','Sawla-Tuna-Kalba','West Gonja','Central Gonja','North Gonja'],
+  'North East':['Nalerigu-Gambaga','Walewale','Bunkpurugu-Nakpayili','Chereponi','Yunyoo-Nasuan'],
+  'Western North':['Sefwi Wiawso','Bibiani-Anhwiaso-Bekwai','Juaboso','Aowin','Bodi','Akontombra','Suaman']
+};
+function loadDistricts(){
+  const r=document.getElementById('regionSelect').value;
+  const d=document.getElementById('districtSelect');
+  d.innerHTML='<option value="">Select District</option>';
+  (districts[r]||[]).forEach(dist=>{const o=document.createElement('option');o.textContent=dist;d.appendChild(o);});
+}
+
+// Plan calculator
+function calculatePlan(){
+  const price=parseFloat(document.getElementById('iphone_model').value)||0;
+  const down=parseFloat(document.getElementById('down_payment').value)||0;
+  const freq=document.getElementById('frequency').value;
+  if(!price||!down){document.getElementById('calc_result').style.display='none';return;}
+  const remaining=price-down;
+  const counts={monthly:6,weekly:26,daily:180};
+  const labels={monthly:'Monthly Installment',weekly:'Weekly Installment',daily:'Daily Installment'};
+  const count=counts[freq];
+  const installment=remaining/count;
+  document.getElementById('c_price').textContent='GHS '+price.toLocaleString();
+  document.getElementById('c_down').textContent='GHS '+down.toLocaleString();
+  document.getElementById('c_remaining').textContent='GHS '+remaining.toLocaleString();
+  document.getElementById('c_count').textContent=count+' payments';
+  document.getElementById('c_freq_label').textContent=labels[freq];
+  document.getElementById('c_installment').textContent='GHS '+installment.toFixed(2);
+  document.getElementById('calc_result').style.display='block';
+}
+
+function submitForm(){
+  alert('✅ Customer registered successfully!\nAccount Number: TRI202400029\nPassword sent to customer.');
+  window.location.href='/staff/customers';
+}
+</script>
+</body></html>

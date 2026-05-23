@@ -6,7 +6,6 @@
   <title>Dashboard - Tritech Hub</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* RESET & BASE */
     * {
       margin: 0;
       padding: 0;
@@ -14,207 +13,240 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      background: #f0f2f5;
-      color: #1a1a2e;
-      overflow-x: hidden;
-    }
-
-    .layout {
-      width: 100%;
+      font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e9eef5 100%);
       min-height: 100vh;
+      padding: 20px;
     }
 
-    .main-content {
+    /* Main Container */
+    .dashboard-container {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 24px 20px;
-      width: 100%;
     }
 
-    /* TOP BAR - Profile on Top Right */
-    .topbar {
+    /* Profile Card - Top Right */
+    .profile-section {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 32px;
-      padding-bottom: 16px;
-      border-bottom: 2px solid #e2e8f0;
+      justify-content: flex-end;
+      margin-bottom: 30px;
     }
 
-    .topbar h1 {
-      font-size: 28px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.5px;
-    }
-
-    .user-chip {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .profile-card {
       background: white;
-      padding: 8px 20px 8px 12px;
-      border-radius: 60px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      cursor: pointer;
-      transition: all 0.2s ease;
+      border-radius: 20px;
+      padding: 12px 24px 12px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.05);
     }
 
-    .user-chip:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transform: translateY(-1px);
+    .profile-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
     }
 
-    .avatar {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #4361ee, #7209b7);
-      color: white;
+    .profile-avatar {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 22px;
+      box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+    }
+
+    .profile-info {
+      text-align: right;
+    }
+
+    .profile-name {
+      font-size: 16px;
       font-weight: 700;
-      font-size: 18px;
-      box-shadow: 0 2px 6px rgba(67, 97, 238, 0.3);
+      color: #1a202c;
     }
 
-    .user-info {
-      line-height: 1.3;
+    .profile-role {
+      font-size: 12px;
+      color: #718096;
+      margin-top: 4px;
     }
 
-    .user-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: #1e293b;
+    /* Section Titles */
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .user-role {
-      font-size: 11px;
-      color: #64748b;
-      font-weight: 500;
+    .section-title i {
+      color: #667eea;
+      font-size: 22px;
     }
 
-    /* STAT CARDS - Exactly 3 per row */
-    .stat-cards {
+    /* Stats Grid - 3 cards per row */
+    .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
       margin-bottom: 48px;
     }
 
+    /* Individual Stat Card */
     .stat-card {
       background: white;
       border-radius: 24px;
-      padding: 20px;
+      padding: 24px;
       display: flex;
       align-items: center;
-      gap: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      transition: all 0.25s ease;
+      gap: 18px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
       cursor: pointer;
-      border: 1px solid rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.04);
     }
 
     .stat-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     }
 
     .stat-icon {
-      width: 60px;
-      height: 60px;
+      width: 65px;
+      height: 65px;
       border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
+      font-size: 30px;
     }
 
     .stat-icon.blue {
-      background: #eef2ff;
+      background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
       color: #4f46e5;
     }
     .stat-icon.green {
-      background: #ecfdf5;
-      color: #10b981;
+      background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+      color: #059669;
     }
     .stat-icon.red {
-      background: #fef2f2;
-      color: #ef4444;
+      background: linear-gradient(135deg, #fee2e2, #fecaca);
+      color: #dc2626;
     }
     .stat-icon.orange {
-      background: #fff7ed;
-      color: #f97316;
+      background: linear-gradient(135deg, #ffedd5, #fed7aa);
+      color: #ea580c;
+    }
+    .stat-icon.purple {
+      background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+      color: #9333ea;
+    }
+
+    .stat-details {
+      flex: 1;
     }
 
     .stat-number {
       font-size: 32px;
       font-weight: 800;
-      color: #0f172a;
+      color: #1e293b;
       line-height: 1.2;
     }
+
     .stat-label {
       font-size: 13px;
       font-weight: 600;
       color: #64748b;
+      margin-top: 6px;
       letter-spacing: 0.3px;
     }
 
-    /* NAV CARDS - Exactly 3 per row */
-    .nav-cards {
+    /* Navigation Grid - 3 cards per row */
+    .nav-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      margin-top: 16px;
+      margin-top: 20px;
     }
 
+    /* Individual Nav Card */
     .nav-card {
       background: white;
       border-radius: 24px;
-      padding: 32px 16px;
+      padding: 32px 20px;
       text-align: center;
       text-decoration: none;
-      color: #1e293b;
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(0, 0, 0, 0.04);
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .nav-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .nav-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 35px rgba(102, 126, 234, 0.2);
     }
 
     .nav-card i {
-      font-size: 38px;
-      color: #4f46e5;
-      transition: all 0.2s;
+      font-size: 42px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      transition: all 0.3s;
+    }
+
+    .nav-card:hover i {
+      transform: scale(1.1);
+      background: linear-gradient(135deg, #764ba2, #667eea);
+      -webkit-background-clip: text;
+      background-clip: text;
     }
 
     .nav-card span {
       font-size: 14px;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 1.2px;
+      color: #2d3748;
     }
 
-    .nav-card:hover {
-      transform: translateY(-6px);
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      box-shadow: 0 20px 30px -12px rgba(79, 70, 229, 0.4);
-    }
-
-    .nav-card:hover i,
     .nav-card:hover span {
-      color: white;
+      color: #667eea;
     }
 
-    /* ALERTS */
+    /* Alert Styles */
     .alert {
       padding: 14px 20px;
       border-radius: 16px;
@@ -225,191 +257,220 @@
     .alert-error {
       background: #fef2f2;
       color: #b91c1c;
-      border-left: 5px solid #ef4444;
+      border-left: 4px solid #ef4444;
     }
     .alert-success {
       background: #ecfdf5;
       color: #065f46;
-      border-left: 5px solid #10b981;
+      border-left: 4px solid #10b981;
     }
 
     /* ========== RESPONSIVE ========== */
-    @media screen and (max-width: 900px) {
-      .main-content {
-        padding: 20px 16px;
+    @media screen and (max-width: 950px) {
+      .stats-grid {
+        gap: 18px;
       }
-      .stat-cards {
-        gap: 16px;
-        margin-bottom: 36px;
+      .nav-grid {
+        gap: 18px;
       }
-      .nav-cards {
-        gap: 16px;
+      .stat-card {
+        padding: 18px;
+      }
+      .stat-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 26px;
       }
       .stat-number {
         font-size: 26px;
       }
-      .stat-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 24px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
       }
-      .nav-card i {
-        font-size: 32px;
+      .nav-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      body {
+        padding: 15px;
+      }
+      .profile-card {
+        padding: 10px 18px 10px 12px;
+      }
+      .profile-avatar {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
       }
       .nav-card {
-        padding: 24px 12px;
+        padding: 24px 16px;
+      }
+      .nav-card i {
+        font-size: 34px;
       }
     }
 
-    @media screen and (max-width: 780px) {
-      .stat-cards {
-        grid-template-columns: repeat(2, 1fr);
+    @media screen and (max-width: 550px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
         gap: 14px;
       }
-      .nav-cards {
-        grid-template-columns: repeat(2, 1fr);
+      .nav-grid {
+        grid-template-columns: 1fr;
         gap: 14px;
       }
-      .topbar h1 {
-        font-size: 24px;
-      }
-      .avatar {
-        width: 38px;
-        height: 38px;
-        font-size: 16px;
-      }
-    }
-
-    @media screen and (max-width: 520px) {
-      .stat-cards {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-      .nav-cards {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-      .topbar {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-      }
-      .user-chip {
+      .profile-section {
         justify-content: center;
-        width: fit-content;
-        margin: 0 auto;
+      }
+      .section-title {
+        font-size: 18px;
+        justify-content: center;
       }
       .stat-card {
-        padding: 16px;
-      }
-      .stat-number {
-        font-size: 28px;
+        padding: 20px;
       }
       .nav-card {
         padding: 20px;
         flex-direction: row;
         justify-content: center;
-        gap: 12px;
+        gap: 15px;
       }
       .nav-card i {
-        font-size: 24px;
+        font-size: 28px;
       }
     }
   </style>
 </head>
 <body>
-<div class="layout">
-  <div class="main-content">
-    <!-- Topbar with Profile on Top Right -->
-    <div class="topbar">
-      <h1><i class="fas fa-chalkboard-user" style="font-size: 26px; margin-right: 8px; color: #4f46e5;"></i> Dashboard</h1>
-      <div class="user-chip">
-        <div class="avatar">J</div>
-        <div class="user-info">
-          <div class="user-name">John Doe</div>
-          <div class="user-role">Tenant Admin</div>
-        </div>
+<div class="dashboard-container">
+  
+  <!-- Profile Card - Top Right Corner -->
+  <div class="profile-section">
+    <div class="profile-card">
+      <div class="profile-avatar">JD</div>
+      <div class="profile-info">
+        <div class="profile-name">John Doe</div>
+        <div class="profile-role">Tenant Admin</div>
       </div>
     </div>
+  </div>
 
-    <!-- Alerts (example, can be removed or dynamic) -->
-    <div class="alert alert-success">
-      <i class="fas fa-check-circle"></i> Welcome back! Your dashboard is ready.
-    </div>
+  <!-- Alert Messages -->
+  <div class="alert alert-success">
+    <i class="fas fa-check-circle"></i> Welcome back, John! Your dashboard is ready.
+  </div>
 
-    <!-- STAT CARDS - ROW 1: 3 cards, ROW 2: 3 cards = total 6 -->
-    <div class="stat-cards">
-      <div class="stat-card">
-        <div class="stat-icon blue"><i class="fas fa-user-tie"></i></div>
-        <div>
-          <div class="stat-number">4</div>
-          <div class="stat-label">Total Staff</div>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon green"><i class="fas fa-users"></i></div>
-        <div>
-          <div class="stat-number">28</div>
-          <div class="stat-label">Total Customers</div>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon green"><i class="fas fa-mobile-alt"></i></div>
-        <div>
-          <div class="stat-number">22</div>
-          <div class="stat-label">Total Devices</div>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon red"><i class="fas fa-exclamation-circle"></i></div>
-        <div>
-          <div class="stat-number">5</div>
-          <div class="stat-label">Overdue Payments</div>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon orange"><i class="fas fa-lock"></i></div>
-        <div>
-          <div class="stat-number">2</div>
-          <div class="stat-label">Locked Phones</div>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
-        <div>
-          <div class="stat-number">20</div>
-          <div class="stat-label">Active Plans</div>
-        </div>
-      </div>
-    </div>
+  <!-- Stats Section Title -->
+  <div class="section-title">
+    <i class="fas fa-chart-line"></i>
+    <span>Statistics Overview</span>
+  </div>
 
-    <!-- NAV CARDS - 3 per row (total 6) -->
-    <div class="nav-cards">
-      <a href="/admin/customers" class="nav-card">
-        <i class="fas fa-users"></i>
-        <span>CUSTOMERS</span>
-      </a>
-      <a href="/admin/staff" class="nav-card">
+  <!-- STAT CARDS - 3 per row (6 cards total) -->
+  <div class="stats-grid">
+    <!-- Card 1: Total Staff -->
+    <div class="stat-card">
+      <div class="stat-icon blue">
         <i class="fas fa-user-tie"></i>
-        <span>STAFF</span>
-      </a>
-      <a href="/admin/devices" class="nav-card">
-        <i class="fas fa-mobile-alt"></i>
-        <span>DEVICES</span>
-      </a>
-      <a href="/admin/transactions" class="nav-card">
-        <i class="fas fa-exchange-alt"></i>
-        <span>TRANSACTIONS</span>
-      </a>
-      <a href="/admin/reports" class="nav-card">
-        <i class="fas fa-chart-bar"></i>
-        <span>REPORTS</span>
-      </a>
-      <a href="/admin/settings" class="nav-card">
-        <i class="fas fa-cog"></i>
-        <span>SETTINGS</span>
-      </a>
+      </div>
+      <div class="stat-details">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Total Staff</div>
+      </div>
     </div>
+
+    <!-- Card 2: Total Customers -->
+    <div class="stat-card">
+      <div class="stat-icon green">
+        <i class="fas fa-users"></i>
+      </div>
+      <div class="stat-details">
+        <div class="stat-number">28</div>
+        <div class="stat-label">Total Customers</div>
+      </div>
+    </div>
+
+    <!-- Card 3: Total Devices -->
+    <div class="stat-card">
+      <div class="stat-icon purple">
+        <i class="fas fa-mobile-alt"></i>
+      </div>
+      <div class="stat-details">
+        <div class="stat-number">22</div>
+        <div class="stat-label">Total Devices</div>
+      </div>
+    </div>
+
+    <!-- Card 4: Overdue Payments -->
+    <div class="stat-card">
+      <div class="stat-icon red">
+        <i class="fas fa-exclamation-circle"></i>
+      </div>
+      <div class="stat-details">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Overdue Payments</div>
+      </div>
+    </div>
+
+    <!-- Card 5: Locked Phones -->
+    <div class="stat-card">
+      <div class="stat-icon orange">
+        <i class="fas fa-lock"></i>
+      </div>
+      <div class="stat-details">
+        <div class="stat-number">2</div>
+        <div class="stat-label">Locked Phones</div>
+      </div>
+    </div>
+
+    <!-- Card 6: Active Plans -->
+    <div class="stat-card">
+      <div class="stat-icon green">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <div class="stat-details">
+        <div class="stat-number">20</div>
+        <div class="stat-label">Active Plans</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Section Title -->
+  <div class="section-title">
+    <i class="fas fa-compass"></i>
+    <span>Quick Navigation</span>
+  </div>
+
+  <!-- NAVIGATION CARDS - 3 per row (6 cards total) -->
+  <div class="nav-grid">
+    <a href="/admin/customers" class="nav-card">
+      <i class="fas fa-users"></i>
+      <span>CUSTOMERS</span>
+    </a>
+    <a href="/admin/staff" class="nav-card">
+      <i class="fas fa-user-tie"></i>
+      <span>STAFF</span>
+    </a>
+    <a href="/admin/devices" class="nav-card">
+      <i class="fas fa-mobile-alt"></i>
+      <span>DEVICES</span>
+    </a>
+    <a href="/admin/transactions" class="nav-card">
+      <i class="fas fa-exchange-alt"></i>
+      <span>TRANSACTIONS</span>
+    </a>
+    <a href="/admin/reports" class="nav-card">
+      <i class="fas fa-chart-bar"></i>
+      <span>REPORTS</span>
+    </a>
+    <a href="/admin/settings" class="nav-card">
+      <i class="fas fa-cog"></i>
+      <span>SETTINGS</span>
+    </a>
   </div>
 </div>
 </body>
